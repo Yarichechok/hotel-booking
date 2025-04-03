@@ -15,7 +15,9 @@ public class Booking {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    public Booking() {}
+    public Booking() {
+
+    }
 
     public Booking(String customerName, Room room) {
         this.customerName = customerName;
