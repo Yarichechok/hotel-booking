@@ -6,5 +6,4 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/bookings")
 public class BookingController {
 
-
     }
