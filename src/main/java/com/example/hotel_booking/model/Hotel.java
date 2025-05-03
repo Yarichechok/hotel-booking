@@ -2,42 +2,26 @@ package com.example.hotel_booking.model;
 
 import jakarta.persistence.*;
 import java.util.List;
+import lombok.*;
 
 @Entity
+@Table(name = "hotel", schema = "public")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
+
 public class Hotel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
+    @Column(name = "name", nullable = false, length = 75)
     private String name;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Room> rooms;
-
-
-    public Hotel() {}
-    public Hotel(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
-    }
 }
