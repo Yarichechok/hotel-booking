@@ -1,53 +1,25 @@
 package com.example.hotel_booking.model;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "number", nullable = false)
     private int number;
+
+    @Column(name = "available", nullable = false)
     private boolean available;
 
-    @ManyToOne
-    @JoinColumn(name = "hotel_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "hotel_id", nullable = false, referencedColumnName = "id")
     private Hotel hotel;
-
-    public Room() {}
-
-    public Room(int number, boolean available, Hotel hotel) {
-        this.number = number;
-        this.available = available;
-        this.hotel = hotel;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
 }
